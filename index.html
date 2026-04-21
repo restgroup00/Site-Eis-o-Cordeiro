@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eis o Cordeiro - Encontre Jesus no Antigo Testamento</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="images/logo.png?v=2" alt="" class="site-logo">
+            <span class="separator"></span>
+            <h1>Eis o Cordeiro</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#devocionais">Devocionais</a></li>
+                <li><a href="#biblia">Bíblia</a></li>
+                <li><a href="#oracoes">Orações</a></li>
+                <li><a href="https://www.instagram.com/pr.samuelmoraes/" target="_blank" class="ig-link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+                </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Bloco 1: Hero -->
+        <section id="home" class="hero-section">
+            <div class="hero-container">
+                <div class="daily-verse-card">
+                    <span class="verse-label">Versículo do Dia</span>
+                    <p id="daily-verse">"Porque Deus tanto amou o mundo, que deu o seu Filho unigênito..." - João 3:16</p>
+                </div>
+                <h2 class="hero-title">Bem vindo ao<br><span>Eis o Cordeiro</span></h2>
+                <p class="hero-subtitle">Encontre Jesus em todos os livros do antigo testamento.<br>
+                <span class="about-text">Nascemos com a missão de revelar a presença de Jesus Cristo em cada página do Antigo Testamento, mostrando que a promessa da salvação já estava escrita desde o princípio.</span></p>
+            </div>
+        </section>
+
+        <!-- Bloco 2: Devocional -->
+        <section id="devocionais" class="section">
+            <h2 class="section-header">Devocional</h2>
+            <div class="devotional-wrapper">
+                <div class="main-devotional">
+                    <div class="devotional-card">
+                        <h3 id="dev-title">Mensagem de Hoje</h3>
+                        <p id="dev-text">Aqui entrará a mensagem inspiradora do dia, focada na edificação e no encorajamento através da palavra.</p>
+                        <div class="dev-verse-box">
+                            <p id="dev-verse">"O Senhor é a minha luz e a minha salvação; a quem temerei?" - Salmos 27:1</p>
+                        </div>
+                    </div>
+                    <button id="btn-calendar" class="btn-outline">Acessar mensagens anteriores</button>
+                </div>
+
+                <div id="calendar-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <h3>Histórico de Devocionais</h3>
+                        <div class="calendar-nav">
+                            <button id="prev-month">&lt;</button>
+                            <span id="month-year">Janeiro 2026</span>
+                            <button id="next-month">&gt;</button>
+                        </div>
+                        <div id="calendar-grid" class="calendar-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bloco 3: Bíblia (Leitura Fluida) -->
+        <section id="biblia" class="section">
+            <h2 class="section-header">Bíblia Sagrada</h2>
+            <div class="bible-reader">
+                <div class="bible-controls">
+                    <div class="control-group">
+                        <label>Livro</label>
+                        <select id="bible-book">
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>Capítulo</label>
+                        <select id="bible-chapter">
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                    <button id="btn-read" class="btn-primary">Ler Capítulo</button>
+                </div>
+                <div id="bible-viewport" class="bible-viewport">
+                    <div class="placeholder-msg">Selecione um livro e capítulo para iniciar a leitura da Palavra.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bloco 4: Pedido de Oração -->
+        <section id="oracoes" class="section">
+            <h2 class="section-header">Pedido de Oração</h2>
+            <div class="prayer-wrapper">
+                <div class="prayer-card">
+                    <p class="prayer-intro">Queremos interceder por você. Deixe seu pedido abaixo.</p>
+                    <form id="prayer-form">
+                        <div class="input-group">
+                            <label>Nome Completo</label>
+                            <input type="text" id="p-name" required placeholder="Seu nome">
+                        </div>
+                        <div class="input-group">
+                            <label>Telefone/WhatsApp</label>
+                            <input type="tel" id="p-phone" required placeholder="(00) 00000-0000">
+                        </div>
+                        <div class="input-group">
+                            <label>Localidade (Cidade/Estado)</label>
+                            <input type="text" id="p-location" required placeholder="Ex: São Paulo - SP">
+                        </div>
+                        <div class="input-group">
+                            <label>Seu Pedido de Oração</label>
+                            <textarea id="p-request" required placeholder="Como podemos orar por você?"></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Enviar Pedido de Oração</button>
+                    </form>
+                    <div id="prayer-feedback" class="hidden">
+                        <p>Seu pedido foi enviado. Estaremos intercedendo por você. 🙏</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="images/logo.png?v=2" alt="" class="footer-logo">
+                <span class="separator"></span>
+                <span class="footer-brand-name">Eis o Cordeiro</span>
+            </div>
+            <p class="copyright">&copy; 2026 Eis o Cordeiro - Encontre Jesus no Antigo Testamento.</p>
+            <div class="footer-nav">
+                <a href="#home">Início</a>
+                <a href="#devocionais">Devocionais</a>
+                <a href="#biblia">Bíblia</a>
+                <a href="#oracoes">Orações</a>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5551930993881" class="whatsapp-float" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+
+    <a href="#home" class="back-to-top" title="Voltar ao topo">↑</a>
+
+    <script src="script.js"></script>
+</body>
+</html>
