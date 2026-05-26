@@ -1,20 +1,25 @@
 /**
-   * SITE EIS O CORDEIRO - Versão de Diagnóstico
+   * SITE EIS O CORDEIRO - Versão Final Corrigida
    */
 
+  // URL de publicação direta do Google Sheets CSV
   const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTH5882wd96tuXd-Qyr3SMisMNxSNK0QDtq4xS64cC5l9GRclyjpxcJKBWI4cVwPc_I9-Fs  HYn90mrt/pub?output=csv';
 
   async function updateDailyContent() {
       console.log("🚀 Iniciando atualização de conteúdo...");
       try {
-          const response = await fetch(SHEET_URL);
-          if (!response.ok) throw new Error(`Erro na resposta do servidor: ${response.status}`);
+          // Adicionamos um timestamp para evitar cache do servidor
+          const response = await fetch(`${SHEET_URL}&t=${new Date().getTime()}`);
+
+          if (!response.ok) {
+              throw new Error(`Erro HTTP: ${response.status} - Verifique se a planilha está 'Publicada na Web'`);
+          }
 
           const data = await response.text();
           console.log("✅ Planilha baixada com sucesso!");
 
           const rows = parseCSV(data);
-          console.log(`📊 Total de linhas encontradas na planilha: ${rows.length}`);
+          console.log(`📊 Linhas encontradas: ${rows.length}`);
 
           const today = new Date();
           const day = String(today.getDate()).padStart(2, '0');
@@ -22,40 +27,38 @@
           const year = today.getFullYear();
           const dateString = `${day}/${month}/${year}`;
 
-          console.log(`📅 Buscando data: ${dateString}`);
+          console.log(`📅 Procurando por: ${dateString}`);
 
-          // Tenta encontrar a linha de hoje
-          let todayRow = rows.find(row => row[0] && row[0].trim() === dateString);
-
-          if (!todayRow && rows.length > 1) {
-              console.warn("⚠️  Data de hoje não encontrada. Usando a primeira linha disponível como fallback.");
-              todayRow = rows[1]; // Pega a primeira linha de dados (pulando o cabeçalho)
-          }
+          // Busca a data ignorando espaços e aspas
+          const todayRow = rows.find(row => {
+              if (!row[0]) return false;
+              const cellValue = row[0].replace(/"/g, '').trim();
+              return cellValue === dateString;
+          });
 
           if (todayRow) {
-              console.log("✨ Conteúdo encontrado! Atualizando elementos...");
+              console.log("✨ Conteúdo encontrado!");
 
               if (document.getElementById('daily-verse')) {
-                  document.getElementById('daily-verse').innerText = todayRow[1] || "Versículo não encontrado";
+                  document.getElementById('daily-verse').innerText = todayRow[1] ? todayRow[1].replace(/"/g, '') : "Versículo não
+  encontrado";
               }
               if (document.getElementById('dev-title')) {
                   document.getElementById('dev-title').innerText = "Mensagem de Hoje";
               }
               if (document.getElementById('dev-text')) {
-                  document.getElementById('dev-text').innerText = todayRow[2] || "Mensagem não encontrada";
+                  const msg = todayRow[2] ? todayRow[2].replace(/"/g, '') : "Mensagem não encontrada";
+                  const verseMsg = todayRow[3] ? todayRow[3].replace(/"/g, '') : "";
+                  document.getElementById('dev-text').innerHTML = `${msg}<br><br><strong>${verseMsg}</strong>`;
               }
-              const devTextElem = document.getElementById('dev-text');
-              if (devTextElem && todayRow[3]) {
-                  devTextElem.innerHTML += `<br><br><strong>${todayRow[3]}</strong>`;
-              }
-              console.log("✅ Site atualizado com sucesso!");
+              console.log("✅ Site atualizado!");
           } else {
-              console.error("❌ Erro crítico: Planilha vazia ou sem dados.");
+              console.warn("⚠️  Data não encontrada na planilha. Verifique se a data de hoje está escrita como DD/MM/AAAA.");
           }
       } catch (error) {
-          console.error("❌ Erro fatal no script:", error);
+          console.error("❌ Erro:", error);
           if (document.getElementById('dev-text')) {
-              document.getElementById('dev-text').innerText = "Erro ao carregar mensagem. Verifique o console.";
+              document.getElementById('dev-text').innerText = "Erro ao conectar com a planilha.";
           }
       }
   }
