@@ -5,90 +5,90 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Eis o Cordeiro - Encontre Jesus no Antigo Testamento</title>
-<style>
-  :root {
-      --primary-blue: #0056b3;
-      --light-blue: #E3F2FD;
-      --deep-blue: #003d80;
-      --white: #FFFFFF;
-      --off-white: #F8FAFC;
-      --text-dark: #1E293B;
-      --text-gray: #475569;
-      --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-      --transition: all 0.3s ease;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Montserrat', sans-serif; background-color: var(--off-white); color: var(--text-dark); line-height: 1.6;
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+      <style>
+          :root {
+              --primary-blue: #0056b3;
+              --light-blue: #E3F2FD;
+              --deep-blue: #003d80;
+              --white: #FFFFFF;
+              --off-white: #F8FAFC;
+              --text-dark: #1E293B;
+              --text-gray: #475569;
+              --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+              --transition: all 0.3s ease;
+          }
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          body { font-family: 'Montserrat', sans-serif; background-color: var(--off-white); color: var(--text-dark); line-height: 1.6;
   scroll-behavior: smooth; }
-  header { background-color: var(--white); padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center;
+          header { background-color: var(--white); padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center;
   box-shadow: 0 2px 15px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
-  .logo { display: flex; align-items: center; gap: 12px; }
-  .site-logo { width: 45px; height: auto; object-fit: contain; }
-  .separator { display: inline-block; width: 2px; height: 20px; background-color: var(--primary-blue); margin: 0 15px; opacity: 0.4;
-  vertical-align: middle; }
-  .logo h1 { font-size: 1.6rem; color: var(--primary-blue); font-weight: 700; margin: 0; }
-  nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
-  nav ul li a { text-decoration: none; color: var(--text-gray); font-weight: 500; transition: var(--transition); }
-  nav ul li a:hover { color: var(--primary-blue); }
-  .ig-link img { width: 26px; transition: var(--transition); }
-  .ig-link img:hover { transform: scale(1.1); }
-  .hero-section { min-height: 80vh; background-color: var(--light-blue); display: flex; justify-content: center; align-items: center;
-  text-align: center; padding: 100px 20px 60px; }
-  .hero-container { max-width: 800px; width: 100%; }
-  .daily-verse-card { background: var(--white); padding: 2rem; border-radius: 20px; box-shadow: var(--shadow); margin-bottom: 3rem;
+          .logo { display: flex; align-items: center; gap: 12px; }
+          .site-logo { width: 45px; height: auto; object-fit: contain; }
+          .separator { display: inline-block; width: 2px; height: 20px; background-color: var(--primary-blue); margin: 0 15px; opacity: 0.4;   vertical-align: middle; }
+          .logo h1 { font-size: 1.6rem; color: var(--primary-blue); font-weight: 700; margin: 0; }
+          nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
+          nav ul li a { text-decoration: none; color: var(--text-gray); font-weight: 500; transition: var(--transition); }
+          nav ul li a:hover { color: var(--primary-blue); }
+          .ig-link img { width: 26px; transition: var(--transition); }
+          .ig-link img:hover { transform: scale(1.1); }
+          .hero-section { min-height: 80vh; background-color: var(--light-blue); display: flex; justify-content: center; align-items:
+  center; text-align: center; padding: 100px 20px 60px; }
+          .hero-container { max-width: 800px; width: 100%; }
+          .daily-verse-card { background: var(--white); padding: 2rem; border-radius: 20px; box-shadow: var(--shadow); margin-bottom: 3rem;
   border-left: 5px solid var(--primary-blue); }
-  .verse-label { display: block; font-size: 0.9rem; font-weight: 600; color: var(--primary-blue); text-transform: uppercase; margin-bottom:
-  10px; }
-  #daily-verse { font-size: 1.2rem; font-style: italic; color: var(--text-dark); }
-  .hero-title { font-size: 3rem; color: var(--deep-blue); margin-bottom: 1.5rem; line-height: 1.2; }
-  .hero-title span { color: var(--primary-blue); }
-  .hero-subtitle { font-size: 1.1rem; color: var(--text-gray); max-width: 600px; margin: 0 auto; }
-  .about-text { display: block; margin-top: 1rem; font-size: 0.95rem; opacity: 0.8; }
-  .devotionals-section { padding: 80px 5%; background-color: var(--white); }
-  .dev-container { max-width: 800px; margin: 0 auto; }
-  .dev-card { background: var(--off-white); padding: 3rem; border-radius: 24px; box-shadow: var(--shadow); text-align: center; border: 1px
-  solid #e2e8f0; }
-  #dev-title { font-size: 2rem; color: var(--deep-blue); margin-bottom: 1.5rem; }
-  #dev-text { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 2rem; }
-  .dev-verse-box { font-style: italic; font-weight: 600; color: var(--primary-blue); margin-bottom: 2rem; }
-  #openCalendarBtn { background-color: var(--primary-blue); color: white; padding: 12px 24px; border: none; border-radius: 30px; cursor:
-  pointer; font-weight: 600; transition: var(--transition); }
-  #openCalendarBtn:hover { background-color: var(--deep-blue); transform: translateY(-2px); }
-  .bible-section { padding: 80px 5%; background-color: var(--off-white); }
-  .bible-container { max-width: 900px; margin: 0 auto; text-align: center; }
-  .bible-controls { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
-  .bible-controls select, .bible-controls button { padding: 10px 15px; border-radius: 8px; border: 1px solid #cbd5e1; font-family: inherit;
-  }
-  .bible-controls button { background: var(--primary-blue); color: white; border: none; cursor: pointer; font-weight: 600; }
-  .bible-viewport { background: white; padding: 2rem; border-radius: 15px; box-shadow: var(--shadow); text-align: left; max-height: 500px;
-  overflow-y: auto; }
-  .bible-verse-item { margin-bottom: 12px; display: flex; gap: 10px; line-height: 1.5; }
-  .verse-number { font-weight: bold; color: var(--primary-blue); min-width: 25px; }
-  .prayers-section { padding: 80px 5%; background-color: var(--white); text-align: center; }
-  .prayers-container { max-width: 600px; margin: 0 auto; }
-  .prayer-form { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
-  .prayer-form input, .prayer-form textarea { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-family: inherit; }
-  .prayer-form button { background: var(--primary-blue); color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer;
-  font-weight: 600; }
-  footer { background: var(--deep-blue); color: white; padding: 40px 5%; text-align: center; }
-  .footer-content { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-  .footer-links { display: flex; gap: 20px; }
-  .footer-links a { color: white; text-decoration: none; opacity: 0.7; transition: var(--transition); font-size: 0.9rem; }
-  .footer-links a:hover { opacity: 1; }
-  .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center;   align-items: center; z-index: 2000; }
-  .modal.hidden { display: none; }
-  .modal-content { background: white; padding: 2rem; border-radius: 20px; max-width: 500px; width: 90%; position: relative; }
-  .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; }
-  .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-top: 20px; }
-  .calendar-day { padding: 10px; background: var(--off-white); border: 1px solid #e2e8f0; border-radius: 5px; cursor: pointer; text-align:
-  center; transition: var(--transition); }
-  .calendar-day:hover { background: var(--primary-blue); color: white; }
-  @media (max-width: 768px) {
-      .hero-title { font-size: 2rem; }
-      header { flex-direction: column; gap: 15px; }
-      nav ul { gap: 15px; }
-  }
-  </style>      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+          .verse-label { display: block; font-size: 0.9rem; font-weight: 600; color: var(--primary-blue); text-transform: uppercase;
+  margin-bottom: 10px; }
+          #daily-verse { font-size: 1.2rem; font-style: italic; color: var(--text-dark); }
+          .hero-title { font-size: 3rem; color: var(--deep-blue); margin-bottom: 1.5rem; line-height: 1.2; }
+          .hero-title span { color: var(--primary-blue); }
+          .hero-subtitle { font-size: 1.1rem; color: var(--text-gray); max-width: 600px; margin: 0 auto; }
+          .about-text { display: block; margin-top: 1rem; font-size: 0.95rem; opacity: 0.8; }
+          .devotionals-section { padding: 80px 5%; background-color: var(--white); }
+          .dev-container { max-width: 800px; margin: 0 auto; }
+          .dev-card { background: var(--off-white); padding: 3rem; border-radius: 24px; box-shadow: var(--shadow); text-align: center;
+  border: 1px solid #e2e8f0; }
+          #dev-title { font-size: 2rem; color: var(--deep-blue); margin-bottom: 1.5rem; }
+          #dev-text { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 2rem; }
+          .dev-verse-box { font-style: italic; font-weight: 600; color: var(--primary-blue); margin-bottom: 2rem; }
+          #openCalendarBtn { background-color: var(--primary-blue); color: white; padding: 12px 24px; border: none; border-radius: 30px;
+  cursor: pointer; font-weight: 600; transition: var(--transition); }
+          #openCalendarBtn:hover { background-color: var(--deep-blue); transform: translateY(-2px); }
+          .bible-section { padding: 80px 5%; background-color: var(--off-white); }
+          .bible-container { max-width: 900px; margin: 0 auto; text-align: center; }
+          .bible-controls { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
+          .bible-controls select, .bible-controls button { padding: 10px 15px; border-radius: 8px; border: 1px solid #cbd5e1; font-family:
+  inherit; }
+          .bible-controls button { background: var(--primary-blue); color: white; border: none; cursor: pointer; font-weight: 600; }
+          .bible-viewport { background: white; padding: 2rem; border-radius: 15px; box-shadow: var(--shadow); text-align: left; max-height:
+  500px; overflow-y: auto; }
+          .bible-verse-item { margin-bottom: 12px; display: flex; gap: 10px; line-height: 1.5; }
+          .verse-number { font-weight: bold; color: var(--primary-blue); min-width: 25px; }
+          .prayers-section { padding: 80px 5%; background-color: var(--white); text-align: center; }
+          .prayers-container { max-width: 600px; margin: 0 auto; }
+          .prayer-form { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
+          .prayer-form input, .prayer-form textarea { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-family: inherit; }
+          .prayer-form button { background: var(--primary-blue); color: white; padding: 12px; border: none; border-radius: 8px; cursor:
+  pointer; font-weight: 600; }
+          footer { background: var(--deep-blue); color: white; padding: 40px 5%; text-align: center; }
+          .footer-content { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+          .footer-links { display: flex; gap: 20px; }
+          .footer-links a { color: white; text-decoration: none; opacity: 0.7; transition: var(--transition); font-size: 0.9rem; }
+          .footer-links a:hover { opacity: 1; }
+          .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content:   center; align-items: center; z-index: 2000; }
+          .modal.hidden { display: none; }
+          .modal-content { background: white; padding: 2rem; border-radius: 20px; max-width: 500px; width: 90%; position: relative; }
+          .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; }
+          .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-top: 20px; }
+          .calendar-day { padding: 10px; background: var(--off-white); border: 1px solid #e2e8f0; border-radius: 5px; cursor: pointer;
+  text-align: center; transition: var(--transition); }
+          .calendar-day:hover { background: var(--primary-blue); color: white; }
+          @media (max-width: 768px) {
+              .hero-title { font-size: 2rem; }
+              header { flex-direction: column; gap: 15px; }
+              nav ul { gap: 15px; }
+          }
+      </style>
   </head>
   <body>
       <header>
@@ -111,7 +111,6 @@
       </header>
 
       <main>
-          <!-- Bloco 1: Hero -->
           <section id="home" class="hero-section">
               <div class="hero-container">
                   <div class="daily-verse-card">
@@ -125,7 +124,6 @@
               </div>
           </section>
 
-          <!-- Bloco 2: Devocionais -->
           <section id="devocionais" class="devotionals-section">
               <div class="dev-container">
                   <div class="dev-card">
@@ -137,7 +135,6 @@
               </div>
           </section>
 
-          <!-- Bloco 3: Bíblia -->
           <section id="biblia" class="bible-section">
               <div class="bible-container">
                   <h2>Leitura Bíblica</h2>
@@ -152,7 +149,6 @@
               </div>
           </section>
 
-          <!-- Bloco 4: Orações (RESTAURADO) -->
           <section id="oracoes" class="prayers-section">
               <div class="prayers-container">
                   <h2>Pedidos de Oração</h2>
@@ -166,7 +162,6 @@
           </section>
       </main>
 
-      <!-- RODAPÉ (RESTAURADO) -->
       <footer>
           <div class="footer-content">
               <p>&copy; 2026 Eis o Cordeiro. Todos os direitos reservados.</p>
@@ -179,7 +174,6 @@
           </div>
       </footer>
 
-      <!-- MODAL DO CALENDÁRIO -->
       <div id="calendarModal" class="modal hidden">
           <div class="modal-content">
               <span class="close-modal">&times;</span>
