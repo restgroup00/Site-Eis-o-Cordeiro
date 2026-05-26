@@ -95,14 +95,14 @@ nav ul li a:hover {
 
 /* BLOCO 1: HERO */
 .hero-section {
-    height: 80vh;
-    background-color: var(--light-blue);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0 20px;
-}
+      min-height: 80vh;
+      background-color: var(--light-blue);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 100px 20px 60px;
+  }
 
 .hero-container {
     max-width: 800px;
