@@ -29,6 +29,7 @@
       </header>
 
       <main>
+          <!-- Bloco 1: Hero -->
           <section id="home" class="hero-section">
               <div class="hero-container">
                   <div class="daily-verse-card">
@@ -36,10 +37,13 @@
                       <p id="daily-verse">Carregando...</p>
                   </div>
                   <h2 class="hero-title">Bem vindo ao<br><span>Eis o Cordeiro</span></h2>
-                  <p class="hero-subtitle">Encontre Jesus em todos os livros do antigo testamento.</p>
+                  <p class="hero-subtitle">Encontre Jesus em todos os livros do antigo testamento.<br>
+                  <span class="about-text">Nascemos com a missão de revelar a presença de Jesus Cristo em cada página do Antigo Testamento,
+  mostrando que a promessa da salvação já estava escrita desde o princípio.</span></p>
               </div>
           </section>
 
+          <!-- Bloco 2: Devocionais -->
           <section id="devocionais" class="devotionals-section">
               <div class="dev-container">
                   <div class="dev-card">
@@ -51,6 +55,7 @@
               </div>
           </section>
 
+          <!-- Bloco 3: Bíblia -->
           <section id="biblia" class="bible-section">
               <div class="bible-container">
                   <h2>Leitura Bíblica</h2>
@@ -64,7 +69,33 @@
                   </div>
               </div>
           </section>
+
+          <!-- Bloco 4: Orações (RESTAURADO) -->
+          <section id="oracoes" class="prayers-section">
+              <div class="prayers-container">
+                  <h2>Pedidos de Oração</h2>
+                  <p>Estamos aqui para interceder por você. Deixe seu pedido abaixo.</p>
+                  <form id="prayer-form" class="prayer-form">
+                      <input type="text" placeholder="Seu Nome" required>
+                      <textarea placeholder="Seu pedido de oração" required></textarea>
+                      <button type="submit">Enviar Pedido</button>
+                  </form>
+              </div>
+          </section>
       </main>
+
+      <!-- RODAPÉ (RESTAURADO) -->
+      <footer>
+          <div class="footer-content">
+              <p>&copy; 2026 Eis o Cordeiro. Todos os direitos reservados.</p>
+              <div class="footer-links">
+                  <a href="#home">Início</a>
+                  <a href="#devocionais">Devocionais</a>
+                  <a href="#biblia">Bíblia</a>
+                  <a href="#oracoes">Orações</a>
+              </div>
+          </div>
+      </footer>
 
       <!-- MODAL DO CALENDÁRIO -->
       <div id="calendarModal" class="modal hidden">
