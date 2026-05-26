@@ -1,41 +1,20 @@
-/**
-   * SITE EIS O CORDEIRO - AJUSTE FINAL DE FUNCIONALIDADES
-   */
+// TESTE DE CARREGAMENTO - Se isso não aparecer, o problema é o cache do GitHub
+  alert("SISTEMA ATIVO: O script foi carregado com sucesso!");
 
   const SHEET_ID = '1XW0mlGqAMyqW-5YdkYSDsO7J1Jza9HSgnw66kswbcnQ';
   const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
 
-  // 1. ATUALIZAÇÃO DIÁRIA (MANTIDA)
-  async function updateDailyContent() {
-      try {
-          const response = await fetch(`${SHEET_URL}&t=${new Date().getTime()}`);
-          if (!response.ok) throw new Error(`Erro: ${response.status}`);
-          const data = await response.text();
-          const rows = parseCSV(data);
-          const today = new Date();
-          const dateString = String(today.getDate()).padStart(2, '0') + '/' + String(today.getMonth() + 1).padStart(2, '0') + '/' +
-  today.getFullYear();
-          const todayRow = rows.find(row => row[0] && row[0].replace(/"/g, '').trim() === dateString);
-          if (todayRow) {
-              if (document.getElementById('daily-verse')) document.getElementById('daily-verse').innerText = todayRow[1] ?
-  todayRow[1].replace(/"/g, '') : '';
-              if (document.getElementById('dev-title')) document.getElementById('dev-title').innerText = 'Mensagem de Hoje';
-              if (document.getElementById('dev-text')) document.getElementById('dev-text').innerText = todayRow[2] ?
-  todayRow[2].replace(/"/g, '') : '';
-              if (document.getElementById('dev-verse')) document.getElementById('dev-verse').innerText = todayRow[3] ?
-  todayRow[3].replace(/"/g, '') : '';
-          }
-      } catch (e) { console.error("Erro planilha:", e); }
-  }
-
-  // 2. CALENDÁRIO (CORRIGIDO PARA ABRIR O MODAL)
-  async function openCalendar() {
+  // --- FUNÇÕES DO CALENDÁRIO (Tornadas globais explicitamente) ---
+  window.openCalendar = async function() {
+      console.log("Tentando abrir calendário...");
       const modal = document.getElementById('calendarModal');
       if (modal) {
           modal.classList.remove('hidden');
           renderCalendar();
+      } else {
+          alert("Erro: Elemento 'calendarModal' não encontrado no HTML.");
       }
-  }
+  };
 
   async function renderCalendar() {
       const grid = document.querySelector('.calendar-grid');
@@ -64,12 +43,11 @@
               document.getElementById('dev-text').innerText = selectedRow[2].replace(/"/g, '');
               document.getElementById('dev-verse').innerText = selectedRow[3] ? selectedRow[3].replace(/"/g, '') : '';
               document.getElementById('calendarModal').classList.add('hidden');
-              window.scrollTo({ top: document.getElementById('devocionais').offsetTop - 100, behavior: 'smooth' });
           } else { alert("Não há mensagem para este dia."); }
       } catch (e) { console.error("Erro calendário:", e); }
   }
 
-  // 3. BÍBLIA (CORRIGIDO PARA CARREGAR VERSÍCULOS)
+  // --- FUNÇÕES DA BÍBLIA (Tornadas globais explicitamente) ---
   const bibleBooks = {
       "Genesis": 50, "Exodo": 40, "Levitico": 27, "Numeros": 36, "Deuteronomio": 34,
       "Josue": 24, "Juizes": 21, "Ruth": 4, "1 Samuel": 31, "2 Samuel": 24,
@@ -80,12 +58,13 @@
       "Obadias": 1, "Jonas": 4, "Miqueias": 7, "Naum": 3, "Habacuque": 3, "Sofonias": 3, "Ageu": 2, "Zacarias": 14, "Malaquias": 4
   };
 
-  async function loadBible() {
+  window.loadBible = async function() {
+      console.log("Tentando carregar bíblia...");
       const book = document.getElementById('book-select').value;
       const chapter = document.getElementById('chapter-select').value;
       const viewport = document.getElementById('bible-viewport');
-      if (!book || !chapter) return;
-      viewport.innerHTML = '<p class="placeholder-msg">Carregando versículos...</p>';
+      if (!book || !chapter) { alert("Selecione o livro e o capítulo!"); return; }
+      viewport.innerHTML = '<p>Carregando...</p>';
       try {
           const response = await fetch(`https://bible-api.com/${book} ${chapter}?translation=almeida`);
           const data = await response.json();
@@ -96,10 +75,10 @@
               div.innerHTML = `<span class="verse-number">${v.verse}</span><span class="verse-text">${v.text}</span>`;
               viewport.appendChild(div);
           });
-      } catch (e) { viewport.innerHTML = '<p class="placeholder-msg">Erro ao carregar a Bíblia.</p>'; }
-  }
+      } catch (e) { viewport.innerHTML = '<p>Erro ao carregar.</p>'; }
+  };
 
-  function updateChapters() {
+  window.updateChapters = function() {
       const book = document.getElementById('book-select').value;
       const chapterSelect = document.getElementById('chapter-select');
       chapterSelect.innerHTML = '';
@@ -110,9 +89,30 @@
           opt.innerText = `Capítulo ${i}`;
           chapterSelect.appendChild(opt);
       }
+  };
+
+  // --- PLANILHA DIÁRIA ---
+  async function updateDailyContent() {
+      try {
+          const response = await fetch(`${SHEET_URL}&t=${new Date().getTime()}`);
+          const data = await response.text();
+          const rows = parseCSV(data);
+          const today = new Date();
+          const dateString = String(today.getDate()).padStart(2, '0') + '/' + String(today.getMonth() + 1).padStart(2, '0') + '/' +
+  today.getFullYear();
+          const todayRow = rows.find(row => row[0] && row[0].replace(/"/g, '').trim() === dateString);
+          if (todayRow) {
+              if (document.getElementById('daily-verse')) document.getElementById('daily-verse').innerText = todayRow[1] ?
+  todayRow[1].replace(/"/g, '') : '';
+              if (document.getElementById('dev-title')) document.getElementById('dev-title').innerText = 'Mensagem de Hoje';
+              if (document.getElementById('dev-text')) document.getElementById('dev-text').innerText = todayRow[2] ?
+  todayRow[2].replace(/"/g, '') : '';
+              if (document.getElementById('dev-verse')) document.getElementById('dev-verse').innerText = todayRow[3] ?
+  todayRow[3].replace(/"/g, '') : '';
+          }
+      } catch (e) { console.error("Erro planilha:", e); }
   }
 
-  // HELPERS E INICIALIZAÇÃO
   function parseCSV(text) {
       const result = [];
       let row = [], col = "", inQuotes = false;
