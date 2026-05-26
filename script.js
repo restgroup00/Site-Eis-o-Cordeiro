@@ -169,3 +169,25 @@
           };
       }
   });
+// --- LÓGICA DE ENVIO DE ORAÇÕES PARA WHATSAPP ---
+  document.addEventListener('DOMContentLoaded', () => {
+      const prayerForm = document.getElementById('prayer-form');
+      if (prayerForm) {
+          prayerForm.onsubmit = function(e) {
+              e.preventDefault(); // Impede a página de recarregar
+
+              // --- COLOQUE SEU NÚMERO AQUI (Exemplo: 5511999999999) ---
+              const meuNumero = '11930993881';
+
+              const nome = prayerForm.querySelector('input').value;
+              const pedido = prayerForm.querySelector('textarea').value;
+
+              // Monta a mensagem formatada para o WhatsApp
+              const mensagem = `Olá! Gostaria de pedir oração:\n\n*Nome:* ${nome}\n*Pedido:* ${pedido}`;
+              const urlWhatsapp = `https://wa.me/${meuNumero}?text=${encodeURIComponent(mensagem)}`;
+
+              // Abre o WhatsApp em uma nova aba
+              window.open(urlWhatsapp, '_blank');
+          };
+      }
+  });
