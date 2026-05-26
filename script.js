@@ -1,53 +1,38 @@
-const SHEET_ID = '1XW0mlGqAMyqW-5YdkYSDsO7J1Jza9HSgnw66kswbcnQ';
+ const SHEET_ID = '1XW0mlGqAMyqW-5YdkYSDsO7J1Jza9HSgnw66kswbcnQ';
   const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
 
-  async function runUpdateV2() {
-      console.log("🚀 Iniciando runUpdateV2 - Modo Caçador...");
+  async function updateDailyContent() {
       try {
           const response = await fetch(`${SHEET_URL}&t=${new Date().getTime()}`);
           if (!response.ok) throw new Error(`Erro: ${response.status}`);
+
           const data = await response.text();
           const rows = parseCSV(data);
+
           const today = new Date();
           const dateString = String(today.getDate()).padStart(2, '0') + '/' + String(today.getMonth() + 1).padStart(2, '0') + '/' +
   today.getFullYear();
 
-          const todayRow = rows.find(row => row[0] && row[0].replace(/"/g, '').trim() === dateString);
+          const todayRow = rows.find(row => {
+              if (!row[0]) return false;
+              return row[0].replace(/"/g, '').trim() === dateString;
+          });
 
           if (todayRow) {
-              const vDia = todayRow[1] ? todayRow[1].replace(/"/g, '') : '';
-              const mensagem = todayRow[2] ? todayRow[2].replace(/"/g, '') : '';
-              const vMensagem = todayRow[3] ? todayRow[3].replace(/"/g, '') : '';
+              const dailyVerseElem = document.getElementById('daily-verse');
+              if (dailyVerseElem) dailyVerseElem.innerText = todayRow[1] ? todayRow[1].replace(/"/g, '') : '';
 
-              // ESTRATÉGIA DE SUBSTITUIÇÃO GLOBAL
-              // 1. Tenta atualizar pelos IDs (estratégia normal)
-              const elVerse = document.getElementById('daily-verse');
-              if (elVerse) elVerse.innerText = vDia;
+              const devTitleElem = document.getElementById('dev-title');
+              if (devTitleElem) devTitleElem.innerText = 'Mensagem de Hoje';
 
-              const elText = document.getElementById('dev-text');
-              if (elText) {
-                  elText.innerHTML = `<p style="margin-bottom: 20px;">${mensagem}</p>`;
-                  if (vMensagem) elText.innerHTML += `<p style="font-style: italic; font-weight: bold; text-align: center; margin-top:
-  20px;">${vMensagem}</p>`;
-              }
+              const devTextElem = document.getElementById('dev-text');
+              if (devTextElem) devTextElem.innerText = todayRow[2] ? todayRow[2].replace(/"/g, '') : '';
 
-              // 2. ESTRATÉGIA "MARTELO": Procura qualquer texto fixo e troca
-              const allElements = document.querySelectorAll('p, span, div, h1, h2, h3');
-              allElements.forEach(el => {
-                  if (el.innerText.includes("O Senhor é a minha luz") || el.innerText.includes("Salmos 27:1")) {
-                      el.innerHTML = `<p style="font-style: italic; font-weight: bold; text-align: center;">${vMensagem}</p>`;
-                      console.log("🔨 Elemento fixo removido e substituído!");
-                  }
-                  if (el.innerText.includes("João 3:16")) {
-                      el.innerText = vDia;
-                      console.log("🔨 Versículo fixo substituído!");
-                  }
-              });
-
-              console.log("✅ SUCESSO TOTAL!");
+              const devVerseElem = document.getElementById('dev-verse');
+              if (devVerseElem) devVerseElem.innerText = todayRow[3] ? todayRow[3].replace(/"/g, '') : '';
           }
       } catch (e) {
-          console.error("❌ Erro:", e);
+          console.error("Erro na atualização:", e);
       }
   }
 
@@ -69,4 +54,4 @@ const SHEET_ID = '1XW0mlGqAMyqW-5YdkYSDsO7J1Jza9HSgnw66kswbcnQ';
       return result;
   }
 
-  document.addEventListener('DOMContentLoaded', runUpdateV2);
+  document.addEventListener('DOMContentLoaded', updateDailyContent);
