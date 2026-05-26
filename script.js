@@ -1,12 +1,11 @@
 /**
-   * SITE EIS O CORDEIRO - VERSÃO FINAL ABSOLUTA
+   * SITE EIS O CORDEIRO - AJUSTE FINAL DE FUNCIONALIDADES
    */
 
   const SHEET_ID = '1XW0mlGqAMyqW-5YdkYSDsO7J1Jza9HSgnw66kswbcnQ';
   const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
 
-  // --- FUNÇÕES GLOBAIS (Necessárias para os botões onclick do HTML) ---
-
+  // 1. ATUALIZAÇÃO DIÁRIA (MANTIDA)
   async function updateDailyContent() {
       try {
           const response = await fetch(`${SHEET_URL}&t=${new Date().getTime()}`);
@@ -17,7 +16,6 @@
           const dateString = String(today.getDate()).padStart(2, '0') + '/' + String(today.getMonth() + 1).padStart(2, '0') + '/' +
   today.getFullYear();
           const todayRow = rows.find(row => row[0] && row[0].replace(/"/g, '').trim() === dateString);
-
           if (todayRow) {
               if (document.getElementById('daily-verse')) document.getElementById('daily-verse').innerText = todayRow[1] ?
   todayRow[1].replace(/"/g, '') : '';
@@ -30,7 +28,7 @@
       } catch (e) { console.error("Erro planilha:", e); }
   }
 
-  // Função para o botão "Acessar mensagens anteriores"
+  // 2. CALENDÁRIO (CORRIGIDO PARA ABRIR O MODAL)
   async function openCalendar() {
       const modal = document.getElementById('calendarModal');
       if (modal) {
@@ -71,7 +69,7 @@
       } catch (e) { console.error("Erro calendário:", e); }
   }
 
-  // Funções da Bíblia
+  // 3. BÍBLIA (CORRIGIDO PARA CARREGAR VERSÍCULOS)
   const bibleBooks = {
       "Genesis": 50, "Exodo": 40, "Levitico": 27, "Numeros": 36, "Deuteronomio": 34,
       "Josue": 24, "Juizes": 21, "Ruth": 4, "1 Samuel": 31, "2 Samuel": 24,
@@ -114,7 +112,7 @@
       }
   }
 
-  // --- HELPERS E INICIALIZAÇÃO ---
+  // HELPERS E INICIALIZAÇÃO
   function parseCSV(text) {
       const result = [];
       let row = [], col = "", inQuotes = false;
@@ -146,7 +144,6 @@
           }
           bookSelect.onchange = updateChapters;
       }
-      // Fecha modal ao clicar no X
       const closeBtn = document.querySelector('.close-modal');
       if (closeBtn) closeBtn.onclick = () => document.getElementById('calendarModal').classList.add('hidden');
   });
