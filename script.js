@@ -1,9 +1,9 @@
 const SHEET_ID = '1XW0mlGqAMyqW-5YdkYSDsO7J1Jza9HSgnw66kswbcnQ';
   const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
 
-  // --- FUNÇÕES DO CALENDÁRIO (Nomes exatos do seu HTML) ---
-  window.openCalendarModal = async function() {
-      console.log("Abrindo calendário...");
+  // --- FUNÇÕES GLOBAIS ---
+
+  window.openCalendarModal = function() {
       const modal = document.getElementById('calendarModal');
       if (modal) {
           modal.classList.remove('hidden');
@@ -38,24 +38,11 @@ const SHEET_ID = '1XW0mlGqAMyqW-5YdkYSDsO7J1Jza9HSgnw66kswbcnQ';
               document.getElementById('dev-text').innerText = selectedRow[2].replace(/"/g, '');
               document.getElementById('dev-verse').innerText = selectedRow[3] ? selectedRow[3].replace(/"/g, '') : '';
               document.getElementById('calendarModal').classList.add('hidden');
-              window.scrollTo({ top: document.getElementById('devocionais').offsetTop - 100, behavior: 'smooth' });
           } else { alert("Não há mensagem para este dia."); }
       } catch (e) { console.error("Erro calendário:", e); }
   }
 
-  // --- FUNÇÕES DA BÍBLIA (Nomes exatos do seu HTML) ---
-  const bibleBooks = {
-      "Genesis": 50, "Exodo": 40, "Levitico": 27, "Numeros": 36, "Deuteronomio": 34,
-      "Josue": 24, "Juizes": 21, "Ruth": 4, "1 Samuel": 31, "2 Samuel": 24,
-      "1 Reis": 22, "2 Reis": 25, "1 Cronicas": 29, "2 Cronicas": 36, "Esdras": 10,
-      "Neemias": 13, "Ester": 10, "Job": 42, "Salmos": 150, "Proverbios": 31,
-      "Eclesiastes": 12, "Canticos": 8, "Isaías": 66, "Jeremias": 52, "Lamentacoes": 5,
-      "Ezequiel": 48, "Daniel": 12, "Oseias": 14, "Joel": 3, "Amos": 9,
-      "Obadias": 1, "Jonas": 4, "Miqueias": 7, "Naum": 3, "Habacuque": 3, "Sofonias": 3, "Ageu": 2, "Zacarias": 14, "Malaquias": 4
-  };
-
   window.loadBibleVerses = async function() {
-      console.log("Carregando bíblia...");
       const book = document.getElementById('book-select').value;
       const chapter = document.getElementById('chapter-select').value;
       const viewport = document.getElementById('bible-viewport');
@@ -87,7 +74,16 @@ const SHEET_ID = '1XW0mlGqAMyqW-5YdkYSDsO7J1Jza9HSgnw66kswbcnQ';
       }
   };
 
-  // --- PLANILHA DIÁRIA E AUXILIARES ---
+  const bibleBooks = {
+      "Genesis": 50, "Exodo": 40, "Levitico": 27, "Numeros": 36, "Deuteronomio": 34,
+      "Josue": 24, "Juizes": 21, "Ruth": 4, "1 Samuel": 31, "2 Samuel": 24,
+      "1 Reis": 22, "2 Reis": 25, "1 Cronicas": 29, "2 Cronicas": 36, "Esdras": 10,
+      "Neemias": 13, "Ester": 10, "Job": 42, "Salmos": 150, "Proverbios": 31,
+      "Eclesiastes": 12, "Canticos": 8, "Isaías": 66, "Jeremias": 52, "Lamentacoes": 5,
+      "Ezequiel": 48, "Daniel": 12, "Oseias": 14, "Joel": 3, "Amos": 9,
+      "Obadias": 1, "Jonas": 4, "Miqueias": 7, "Naum": 3, "Habacuque": 3, "Sofonias": 3, "Ageu": 2, "Zacarias": 14, "Malaquias": 4
+  };
+
   async function updateDailyContent() {
       try {
           const response = await fetch(`${SHEET_URL}&t=${new Date().getTime()}`);
