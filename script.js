@@ -1,18 +1,13 @@
-// TESTE DE CARREGAMENTO - Se isso não aparecer, o problema é o cache do GitHub
-  alert("SISTEMA ATIVO: O script foi carregado com sucesso!");
-
-  const SHEET_ID = '1XW0mlGqAMyqW-5YdkYSDsO7J1Jza9HSgnw66kswbcnQ';
+const SHEET_ID = '1XW0mlGqAMyqW-5YdkYSDsO7J1Jza9HSgnw66kswbcnQ';
   const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
 
-  // --- FUNÇÕES DO CALENDÁRIO (Tornadas globais explicitamente) ---
-  window.openCalendar = async function() {
-      console.log("Tentando abrir calendário...");
+  // --- FUNÇÕES DO CALENDÁRIO (Nomes exatos do seu HTML) ---
+  window.openCalendarModal = async function() {
+      console.log("Abrindo calendário...");
       const modal = document.getElementById('calendarModal');
       if (modal) {
           modal.classList.remove('hidden');
           renderCalendar();
-      } else {
-          alert("Erro: Elemento 'calendarModal' não encontrado no HTML.");
       }
   };
 
@@ -43,11 +38,12 @@
               document.getElementById('dev-text').innerText = selectedRow[2].replace(/"/g, '');
               document.getElementById('dev-verse').innerText = selectedRow[3] ? selectedRow[3].replace(/"/g, '') : '';
               document.getElementById('calendarModal').classList.add('hidden');
+              window.scrollTo({ top: document.getElementById('devocionais').offsetTop - 100, behavior: 'smooth' });
           } else { alert("Não há mensagem para este dia."); }
       } catch (e) { console.error("Erro calendário:", e); }
   }
 
-  // --- FUNÇÕES DA BÍBLIA (Tornadas globais explicitamente) ---
+  // --- FUNÇÕES DA BÍBLIA (Nomes exatos do seu HTML) ---
   const bibleBooks = {
       "Genesis": 50, "Exodo": 40, "Levitico": 27, "Numeros": 36, "Deuteronomio": 34,
       "Josue": 24, "Juizes": 21, "Ruth": 4, "1 Samuel": 31, "2 Samuel": 24,
@@ -58,8 +54,8 @@
       "Obadias": 1, "Jonas": 4, "Miqueias": 7, "Naum": 3, "Habacuque": 3, "Sofonias": 3, "Ageu": 2, "Zacarias": 14, "Malaquias": 4
   };
 
-  window.loadBible = async function() {
-      console.log("Tentando carregar bíblia...");
+  window.loadBibleVerses = async function() {
+      console.log("Carregando bíblia...");
       const book = document.getElementById('book-select').value;
       const chapter = document.getElementById('chapter-select').value;
       const viewport = document.getElementById('bible-viewport');
@@ -91,7 +87,7 @@
       }
   };
 
-  // --- PLANILHA DIÁRIA ---
+  // --- PLANILHA DIÁRIA E AUXILIARES ---
   async function updateDailyContent() {
       try {
           const response = await fetch(`${SHEET_URL}&t=${new Date().getTime()}`);
